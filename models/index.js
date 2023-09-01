@@ -1,5 +1,3 @@
-const { User } = require("./auth/user");
+const index = "index";
 
-const { Notice } = require("./notice/notice");
-
-module.exports = { User, Notice };
+module.exports = { index };

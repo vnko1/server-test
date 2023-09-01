@@ -1,3 +1,3 @@
-const { emailFrom } = require("./constants");
+const index = "index";
 
-module.exports = { emailFrom };
+module.exports = { index };
