@@ -5,11 +5,10 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 require("dotenv").config();
 
-// const { authRouter, notices } = require("./routes");
-
 const app = express();
 
-const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+const formatsLogger =
+  app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
 app.use(cors());
@@ -25,10 +24,7 @@ app.get("/", async (req, res) => {
   res.status(200).json({ mess: "OK" });
 });
 
-// app.use("/auth", authRouter);
-// app.use("/notices", notices);
-
-app.use((req, res) => {
+app.use((_, res) => {
   res.status(404).json({ message: "Not found" });
 });
 
