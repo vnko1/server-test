@@ -2,7 +2,7 @@ const Joi = require("joi");
 const { emailRegex } = require("../constants");
 
 const usersSchema = Joi.object({
-  userName: Joi.string()
+  username: Joi.string()
     .min(2)
     .max(30)
     .required()
@@ -32,7 +32,7 @@ const usersSchema = Joi.object({
 });
 
 const editUserSchema = Joi.object({
-  userName: Joi.string()
+  username: Joi.string()
     .min(2)
     .max(30)
     .messages({ "any.only": "Invalid username" }),

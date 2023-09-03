@@ -1,3 +1,4 @@
-const index = "index";
+const { query } = require("./db/db");
+const { createTables } = require("./db/users");
 
-module.exports = { index };
+module.exports = { query, createTables };

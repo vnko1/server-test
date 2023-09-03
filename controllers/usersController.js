@@ -1,6 +1,9 @@
 const { tryCatchWrapper } = require("../utils");
+const { query } = require("../services");
 
-const addUser = (req, res) => {
+const addUser = async (req, res) => {
+  // const profile = await query();
+
   res.json({ data: req.body });
 };
 
