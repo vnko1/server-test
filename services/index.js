@@ -1,4 +1,3 @@
-const { query } = require("./db/db");
-const { createTables } = require("./db/users");
+const { DataBase } = require("./DataBase");
 
-module.exports = { query, createTables };
+module.exports = { DataBase };
