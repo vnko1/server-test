@@ -5,6 +5,8 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 require("dotenv").config();
 
+const { usersRouter } = require("./routes");
+
 const app = express();
 
 const formatsLogger =
@@ -20,9 +22,7 @@ app.use(
   swaggerUi.setup(swaggerDocument)
 );
 
-app.get("/", async (req, res) => {
-  res.status(200).json({ mess: "OK" });
-});
+app.use("/users", usersRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Not found" });

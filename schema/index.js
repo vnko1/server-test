@@ -1,3 +1,3 @@
-const index = "index";
+const { usersSchema, editUserSchema } = require("./usersSchema");
 
-module.exports = { index };
+module.exports = { usersSchema, editUserSchema };

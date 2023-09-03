@@ -1,3 +1,3 @@
-const index = "index";
+const usersRouter = require("./usersRouter");
 
-module.exports = { index };
+module.exports = { usersRouter };
