@@ -1,3 +1,8 @@
-const index = "index";
+const {
+  addUser,
+  getUsers,
+  deleteUser,
+  updateUser,
+} = require("./usersController");
 
-module.exports = { index };
+module.exports = { addUser, getUsers, deleteUser, updateUser };

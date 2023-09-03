@@ -1,3 +1,5 @@
-const index = "index";
+const fieldValidation = require("./fieldValidation");
 
-module.exports = { index };
+const isValidId = require("./isValidId");
+
+module.exports = { fieldValidation, isValidId };

@@ -1,3 +1,3 @@
-const index = "index";
+const { emailRegex } = require("./regex");
 
-module.exports = { index };
+module.exports = { emailRegex };
