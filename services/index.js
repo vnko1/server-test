@@ -1,3 +1,3 @@
-const index = "index";
+const DB = require("./DB");
 
-module.exports = { index };
+module.exports = { DB };

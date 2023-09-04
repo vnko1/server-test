@@ -1,8 +1,15 @@
 const {
   addUser,
   getUsers,
+  getUser,
   deleteUser,
   updateUser,
-} = require("./usersController");
+} = require("./users/usersController");
 
-module.exports = { addUser, getUsers, deleteUser, updateUser };
+module.exports = {
+  addUser,
+  getUsers,
+  deleteUser,
+  updateUser,
+  getUser,
+};
