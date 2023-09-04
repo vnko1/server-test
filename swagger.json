@@ -1,12 +1,392 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.0.2",
-    "title": "My pet api",
-    "description": "description",
-    "license": {
-      "name": "MIT",
-      "url": "https://opensource.org/licenses/MIT"
+    "version": "1.0.1",
+    "title": "ExpressJS REST API",
+    "description": "ExpressJS REST API server documentation"
+  },
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "servers": [{ "url": "http://localhost:3000" }],
+  "tags": [{ "name": "Users", "description": "Users endpoints" }],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get users",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "role",
+            "schema": { "type": "string" },
+            "example": ["admin", "user"],
+            "required": false,
+            "description": "Gets all users matching the search query by the role."
+          }
+        ],
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operations.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/UsersResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create user",
+        "parameters": [],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/CreateUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get user data",
+        "parameters": [],
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operations.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "User not exists",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Edit user",
+        "parameters": [],
+        "requestBody": {
+          "description": "Users object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/UpdateUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request!",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete user",
+        "parameters": [],
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "204": {
+            "description": "Successfull operations",
+            "content": {}
+          },
+          "404": {
+            "description": "User not exists",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UsersResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "integer", "example": 1 },
+                "username": { "type": "string", "example": "string" },
+                "email": {
+                  "type": "string",
+                  "example": "email@email.com"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": ["admin", "user"]
+                },
+                "createdAt": {
+                  "type": "string",
+
+                  "example": "2022-12-22T00:00:00.000Z"
+                },
+                "ProfileID": { "type": "integer", "example": 1 },
+                "Profile": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer", "example": 1 },
+                    "firstName": {
+                      "type": "string",
+                      "example": "String"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "String"
+                    },
+                    "state": {
+                      "type": "string",
+                      "enum": ["male", "female"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CreateUserRequest": {
+        "type": "object",
+        "required": [
+          "username",
+          "email",
+          "role",
+          "firstName",
+          "lastName",
+          "state"
+        ],
+        "properties": {
+          "username": { "type": "string", "example": "string" },
+          "email": {
+            "type": "string",
+            "example": "email@email.com"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["admin", "user"]
+          },
+          "firstName": {
+            "type": "string",
+            "example": "String"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "String"
+          },
+          "state": {
+            "type": "string",
+            "enum": ["male", "female"]
+          }
+        }
+      },
+      "CreateUserResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "user": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "integer", "example": 1 },
+                  "username": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "email@email.com"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": ["admin", "user"]
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2022-12-22T00:00:00.000Z"
+                  },
+                  "ProfileID": { "type": "integer", "example": 1 }
+                }
+              },
+              "profile": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "integer", "example": 1 },
+                  "firstName": {
+                    "type": "string",
+                    "example": "String"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "String"
+                  },
+                  "state": {
+                    "type": "string",
+                    "enum": ["male", "female"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer", "example": 1 },
+              "username": { "type": "string", "example": "string" },
+              "email": {
+                "type": "string",
+                "example": "email@email.com"
+              },
+              "role": {
+                "type": "string",
+                "enum": ["admin", "user"]
+              },
+              "createdAt": {
+                "type": "string",
+
+                "example": "2022-12-22T00:00:00.000Z"
+              },
+              "ProfileID": { "type": "integer", "example": 1 },
+              "Profile": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "integer", "example": 1 },
+                  "firstName": {
+                    "type": "string",
+                    "example": "String"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "String"
+                  },
+                  "state": {
+                    "type": "string",
+                    "enum": ["male", "female"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "UpdateUserResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "updatedUser": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer", "example": 1 },
+                    "username": {
+                      "type": "string",
+                      "example": "string"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "email@email.com"
+                    },
+                    "role": {
+                      "type": "string",
+                      "enum": ["admin", "user"]
+                    },
+                    "createdAt": {
+                      "type": "string",
+
+                      "example": "2022-12-22T00:00:00.000Z"
+                    },
+                    "ProfileID": { "type": "integer", "example": 1 }
+                  }
+                }
+              },
+              "updatedProfile": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer", "example": 1 },
+                    "firstName": {
+                      "type": "string",
+                      "example": "String"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "String"
+                    },
+                    "state": {
+                      "type": "string",
+                      "enum": ["male", "female"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

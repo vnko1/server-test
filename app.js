@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(
-  "/api-documentation",
+  "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(swaggerDocument)
 );

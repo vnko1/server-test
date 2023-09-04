@@ -6,7 +6,10 @@ Profile.hasOne(User, {
   onUpdate: "CASCADE",
 });
 
-User.belongsTo(Profile);
+User.belongsTo(Profile, {
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
+});
 
 User.sync({ alter: true });
 Profile.sync({ alter: true });
