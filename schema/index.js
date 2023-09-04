@@ -1,3 +1,5 @@
 const { usersSchema, editUserSchema } = require("./usersSchema");
 
-module.exports = { usersSchema, editUserSchema };
+const { querySchema } = require("./querySchema");
+
+module.exports = { usersSchema, editUserSchema, querySchema };

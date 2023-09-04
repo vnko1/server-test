@@ -54,6 +54,6 @@ const editUserSchema = Joi.object({
   role: Joi.string()
     .valid("admin", "user")
     .messages({ "any.only": "Role must be admin or user" }),
-}).or("userName", "firstName", "lastName", "email", "role", "state");
+}).or("username", "firstName", "lastName", "email", "role", "state");
 
 module.exports = { usersSchema, editUserSchema };

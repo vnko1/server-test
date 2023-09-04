@@ -1,33 +1,48 @@
-const { tryCatchWrapper } = require("../utils");
-const { DataBase } = require("../services");
+const { tryCatchWrapper, httpError } = require("../utils");
+const { DB } = require("../services");
 
 const addUser = async (req, res) => {
-  const newUser = await DataBase.createUser(req.body);
+  const newUser = await DB.createUser(req.body);
 
   res.json({ data: newUser });
 };
 
-const getUsers = (req, res) => {
+const getUsers = async (req, res) => {
   const { query } = req;
-  console.log("role => ", query.role);
-  res.json({ users: { user: "name" } });
+
+  const users = await DB.getAllUsers(query);
+
+  res.json({ data: users });
 };
 
-const deleteUser = (req, res) => {
+const getUser = async (req, res) => {
   const keys = Object.keys(req.params);
-  console.log("delete by userId => ", req.params[keys]);
+
+  const user = await DB.getUser(req.params[keys]);
+
+  res.json({ data: user });
+};
+
+const updateUser = async (req, res) => {
+  const keys = Object.keys(req.params);
+  const updatedUser = await DB.editUser(req.body, req.params[keys]);
+
+  res.json({ data: updatedUser });
+};
+
+const deleteUser = async (req, res) => {
+  const keys = Object.keys(req.params);
+  const result = await DB.deleteProfile(req.params[keys]);
+
+  if (!result) throw httpError(404, "User not exists");
+
   res.sendStatus(204);
-};
-
-const updateUser = (req, res) => {
-  const keys = Object.keys(req.params);
-  console.log("update by userId => ", req.params[keys]);
-  res.json({ data: req.body });
 };
 
 module.exports = {
   addUser: tryCatchWrapper(addUser),
   getUsers: tryCatchWrapper(getUsers),
+  getUser: tryCatchWrapper(getUser),
   deleteUser: tryCatchWrapper(deleteUser),
   updateUser: tryCatchWrapper(updateUser),
 };

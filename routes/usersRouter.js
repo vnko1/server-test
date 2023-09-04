@@ -1,16 +1,27 @@
 const express = require("express");
-const { usersSchema, editUserSchema } = require("../schema");
-const { fieldValidation, isValidId } = require("../middlewares");
+const {
+  usersSchema,
+  editUserSchema,
+  querySchema,
+} = require("../schema");
+const {
+  fieldValidation,
+  isValidId,
+  queryValidation,
+} = require("../middlewares");
 const {
   addUser,
   getUsers,
+  getUser,
   deleteUser,
   updateUser,
 } = require("../controllers");
 
 const router = express.Router();
 
-router.get("/", getUsers);
+router.get("/", queryValidation(querySchema), getUsers);
+
+router.get("/:userId", isValidId(400, "Wrong id"), getUser);
 
 router.post("/", fieldValidation(usersSchema), addUser);
 

@@ -2,4 +2,6 @@ const fieldValidation = require("./fieldValidation");
 
 const isValidId = require("./isValidId");
 
-module.exports = { fieldValidation, isValidId };
+const queryValidation = require("./queryValidation");
+
+module.exports = { fieldValidation, isValidId, queryValidation };
