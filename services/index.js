@@ -1,3 +1,3 @@
-const DB = require("./DataBase");
+const DB = require("./DB");
 
 module.exports = { DB };

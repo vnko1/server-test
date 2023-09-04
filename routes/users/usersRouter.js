@@ -3,19 +3,19 @@ const {
   usersSchema,
   editUserSchema,
   querySchema,
-} = require("../schema");
+} = require("../../schema");
 const {
   fieldValidation,
   isValidId,
   queryValidation,
-} = require("../middlewares");
+} = require("../../middlewares");
 const {
   addUser,
   getUsers,
   getUser,
   deleteUser,
   updateUser,
-} = require("../controllers");
+} = require("../../controllers");
 
 const router = express.Router();
 

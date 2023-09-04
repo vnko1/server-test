@@ -1,5 +1,5 @@
-const { tryCatchWrapper, httpError } = require("../utils");
-const { DB } = require("../services");
+const { tryCatchWrapper, httpError } = require("../../utils");
+const { DB } = require("../../services");
 
 const addUser = async (req, res) => {
   const newUser = await DB.createUser(req.body);
