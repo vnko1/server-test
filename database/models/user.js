@@ -1,5 +1,5 @@
 const { sequelize } = require("../config/config");
-const { DataTypes } = require("sequelize");
+const { DataTypes, UniqueConstraintError } = require("sequelize");
 
 const { emailRegex } = require("../../constants");
 
@@ -15,7 +15,10 @@ const User = sequelize.define(
     },
     role: DataTypes.ENUM(["admin", "user"]),
   },
-  { createdAt: true, updatedAt: false }
+  {
+    createdAt: true,
+    updatedAt: false,
+  }
 );
 
 module.exports = { User };

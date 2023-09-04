@@ -20,6 +20,8 @@ const getUser = async (req, res) => {
 
   const user = await DB.getUser(req.params[keys]);
 
+  if (!user) throw httpError(404, "User not exists");
+
   res.json({ data: user });
 };
 

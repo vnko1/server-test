@@ -2,12 +2,9 @@ const { User, Profile } = require("../database");
 
 class DB {
   static async createUser(data) {
-    const profile = await Profile.create(data);
+    const user = await User.create(data);
+    const profile = await user.createProfile(data);
 
-    const user = await User.create({
-      ...data,
-      ProfileId: profile.id,
-    });
     return { profile, user };
   }
 

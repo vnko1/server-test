@@ -10,10 +10,6 @@ const Profile = sequelize.define(
       allowNull: false,
     },
     state: DataTypes.ENUM(["male", "female"]),
-    // profileId: {
-    //   type: DataTypes.UUID,
-    //   primaryKey: true,
-    // },
   },
   { createdAt: false, updatedAt: false }
 );
