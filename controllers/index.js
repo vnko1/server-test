@@ -4,6 +4,7 @@ const {
   getUser,
   deleteUser,
   updateUser,
+  getProfile,
 } = require("./users/usersController");
 
 module.exports = {
@@ -12,4 +13,5 @@ module.exports = {
   deleteUser,
   updateUser,
   getUser,
+  getProfile,
 };
