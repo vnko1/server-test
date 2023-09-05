@@ -11,7 +11,13 @@ const Profile = sequelize.define(
     },
     state: DataTypes.ENUM(["male", "female"]),
   },
-  { createdAt: false, updatedAt: false }
+  {
+    createdAt: false,
+    updatedAt: false,
+    defaultScope: {
+      attributes: { exclude: ["id"] },
+    },
+  }
 );
 
 module.exports = { Profile };

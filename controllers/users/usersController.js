@@ -28,17 +28,27 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const keys = Object.keys(req.params);
   const updatedUser = await DB.editUser(req.body, req.params[keys]);
-
+  if (!updatedUser) throw httpError(404, "User not exists");
   res.json({ data: updatedUser });
 };
 
 const deleteUser = async (req, res) => {
   const keys = Object.keys(req.params);
-  const result = await DB.deleteProfile(req.params[keys]);
+  const result = await DB.deleteUser(req.params[keys]);
 
   if (!result) throw httpError(404, "User not exists");
 
   res.sendStatus(204);
+};
+
+const getProfile = async (req, res) => {
+  const keys = Object.keys(req.params);
+
+  const profile = await DB.getProfile(req.params[keys]);
+
+  if (!profile) throw httpError(404, "Profile not exists");
+
+  res.json({ data: profile });
 };
 
 module.exports = {
@@ -47,4 +57,5 @@ module.exports = {
   getUser: tryCatchWrapper(getUser),
   deleteUser: tryCatchWrapper(deleteUser),
   updateUser: tryCatchWrapper(updateUser),
+  getProfile: tryCatchWrapper(getProfile),
 };
