@@ -73,7 +73,7 @@
         }
       }
     },
-    "/users/{userId}": {
+    "/users/{ProfileId}": {
       "get": {
         "tags": ["Users"],
         "summary": "Get user data",
