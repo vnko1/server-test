@@ -1,5 +1,5 @@
 const { sequelize } = require("../config/config");
-const { DataTypes, UniqueConstraintError } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
 const { emailRegex } = require("../../constants");
 
@@ -18,6 +18,9 @@ const User = sequelize.define(
   {
     createdAt: true,
     updatedAt: false,
+    defaultScope: {
+      attributes: { exclude: ["id"] },
+    },
   }
 );
 

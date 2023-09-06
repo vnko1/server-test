@@ -14,9 +14,6 @@ const Profile = sequelize.define(
   {
     createdAt: false,
     updatedAt: false,
-    defaultScope: {
-      attributes: { exclude: ["id"] },
-    },
   }
 );
 

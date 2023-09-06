@@ -21,17 +21,17 @@ const router = express.Router();
 
 router.get("/", queryValidation(querySchema), getUsers);
 
-router.get("/:userId", isValidId(400, "Wrong id"), getUser);
+router.get("/:ProfileId", isValidId(400, "Wrong id"), getUser);
 
 router.post("/", fieldValidation(usersSchema), addUser);
 
 router.patch(
-  "/:userId",
+  "/:ProfileId",
   isValidId(400, "Wrong id"),
   fieldValidation(editUserSchema),
   updateUser
 );
 
-router.delete("/:userId", isValidId(400, "Wrong id"), deleteUser);
+router.delete("/:ProfileId", isValidId(400, "Wrong id"), deleteUser);
 
 module.exports = router;
