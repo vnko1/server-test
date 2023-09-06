@@ -13,23 +13,24 @@ class DB {
   }
 
   static async getUser(id) {
-    return await User.findByPk(id, { include: Profile });
+    return await User.findOne({
+      include: Profile,
+      where: { ProfileId: id },
+    });
   }
 
   static async getProfile(id) {
-    return await Profile.findByPk(id);
+    return await Profile.findByPk(id, { include: User });
   }
 
-  static async editUser(data, id) {
-    const findUser = await User.findByPk(id);
-    if (!findUser?.ProfileId) return null;
+  static async editUser(data, ProfileId) {
     const user = await User.update(data, {
-      where: { id },
+      where: { ProfileId },
       returning: true,
     });
 
     const profile = await Profile.update(data, {
-      where: { id: findUser.ProfileId },
+      where: { id: ProfileId },
       returning: true,
     });
 
@@ -37,10 +38,8 @@ class DB {
   }
 
   static async deleteUser(id) {
-    const findUser = await User.findByPk(id);
-    if (!findUser) return null;
-    return await Profile.destroy({
-      where: { id: findUser.ProfileId },
+    return await User.destroy({
+      where: { id },
     });
   }
 
